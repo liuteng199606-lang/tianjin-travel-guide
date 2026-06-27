@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>济南→天津 情侣周末两日游攻略</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#faf8f6;color:#444;line-height:1.85;font-size:15px}
+.hero{background:linear-gradient(135deg,#e91e63,#ff5722);color:#fff;padding:50px 30px;text-align:center}
+.hero h1{font-size:2.4em;font-weight:900}
+.hero .sub{opacity:.92;margin-top:6px;font-size:1.05em}
+
+/* Tabs */
+.tab-bar{display:flex;background:#2c2c3a;position:sticky;top:0;z-index:100}
+.tab-btn{flex:1;padding:14px 8px;text-align:center;color:rgba(255,255,255,.6);cursor:pointer;font-size:.88em;font-weight:600;border:none;background:none;white-space:nowrap;border-bottom:3px solid transparent}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,.05)}
+.tab-btn.active{color:#fff;border-bottom-color:#e91e63;background:rgba(255,255,255,.08)}
+.tab-page{display:none}
+.tab-page.active{display:block}
+
+.container{max-width:880px;margin:0 auto;padding:30px 20px}
+.section{margin-bottom:36px}
+.section-title{font-size:1.4em;font-weight:700;color:#2c2c3a;margin-bottom:16px}
+
+/* Cards */
+.day-card{background:#fff;border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.06);overflow:hidden;margin-bottom:26px}
+.day-header{padding:16px 24px;color:#fff;font-size:1.15em;font-weight:700}
+.day1 .day-header{background:linear-gradient(135deg,#e91e63,#ff5722)}
+.day2 .day-header{background:linear-gradient(135deg,#ff6b6b,#f0932b)}
+.day-body{padding:22px 24px}
+
+/* Timeline */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2.5px;background:linear-gradient(to bottom,#e91e63,#ffccbc);border-radius:2px}
+.tl{position:relative;margin-bottom:22px}
+.tl:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-23px;top:5px;width:13px;height:13px;border-radius:50%;background:#e91e63;border:2.5px solid #fff;box-shadow:0 0 0 2px #e91e63}
+.tl-dot.food{background:#ff6b35;box-shadow:0 0 0 2px #ff6b35}
+.tl-dot.transport{background:#4caf50;box-shadow:0 0 0 2px #4caf50}
+.tl-dot.night{background:#3f51b5;box-shadow:0 0 0 2px #3f51b5}
+.time-tag{display:inline-block;background:#fce4ec;color:#e91e63;padding:1px 10px;border-radius:14px;font-size:.8em;font-weight:600;margin-bottom:4px}
+.tl h3{font-size:1.02em;font-weight:700;color:#2c2c3a;margin-bottom:2px}
+.tl p{color:#888;font-size:.9em}
+.tips{background:#fff8e1;border-left:3px solid #ffc107;padding:7px 11px;margin-top:7px;border-radius:0 8px 8px 0;font-size:.84em;color:#795548}
+
+/* Info grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.info-card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.info-card h3{font-size:.98em;margin-bottom:8px}
+.info-card ul{list-style:none;padding:0}
+.info-card li{padding:2px 0;padding-left:14px;position:relative;color:#888;font-size:.88em}
+.info-card li::before{content:'•';position:absolute;left:0;color:#e91e63;font-weight:bold}
+
+/* Vibe */
+.vibe-box{background:linear-gradient(135deg,#fff5f5,#ffeaa7);border-radius:18px;padding:24px;text-align:center;margin-bottom:26px}
+.vibe-box h2{font-size:1.2em;color:#c0392b;margin-bottom:8px}
+.vibe-box p{color:#7f8c8d;font-size:.9em}
+.vibe-tags{margin-top:12px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.vibe-tags span{background:#fff;padding:4px 14px;border-radius:16px;font-size:.82em;color:#e91e63;font-weight:500}
+
+/* Tables */
+.train-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:14px}
+.train-table th{background:#2c2c3a;color:#fff;padding:11px 14px;text-align:left;font-size:.85em;font-weight:600}
+.train-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.88em}
+.train-table tr:last-child td{border-bottom:none}
+.budget-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.budget-table th{background:#2c2c3a;color:#fff;padding:11px 14px;text-align:left;font-size:.88em}
+.budget-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.9em}
+.budget-table tr:last-child td{border-bottom:none;background:#fff5f5;font-weight:700}
+.amt{text-align:right;color:#ff6b35;font-weight:600}
+
+/* Hotel */
+.hotel-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:14px;display:flex}
+.hotel-icon{width:90px;display:flex;align-items:center;justify-content:center;font-size:2.4em;flex-shrink:0}
+.hotel-info{padding:14px 18px;flex:1}
+.hotel-info h3{font-size:1em;font-weight:700;color:#2c2c3a;margin-bottom:3px}
+.hotel-info .price{color:#e91e63;font-weight:700;font-size:1.05em}
+.hotel-info .tags{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0}
+.hotel-info .tag{background:#f5f0eb;padding:1px 8px;border-radius:8px;font-size:.72em;color:#888}
+.hotel-info p{font-size:.84em;color:#666}
+
+/* Food */
+.food-card{background:#fff;border-radius:18px;padding:14px 18px;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.food-emoji{font-size:1.6em}
+.food-info h4{font-weight:700;font-size:.9em}
+.food-info p{font-size:.82em;color:#888}
+.food-price{margin-left:auto;color:#ff6b35;font-weight:700;font-size:.95em;white-space:nowrap}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.photo-card{border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);position:relative;aspect-ratio:16/10;background:#e0e0e0}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.65));color:#fff;padding:16px 12px 8px;font-size:.85em;font-weight:500}
+
+/* Note boxes */
+.note-box{background:#fff;border-left:4px solid #e91e63;border-radius:0 18px 18px 0;padding:14px 18px;margin-bottom:12px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.note-box h4{color:#e91e63;margin-bottom:3px;font-size:.92em}
+.note-box p{font-size:.85em;color:#888}
+.tip-box{background:#fff8e1;border-left:4px solid #ffc107;border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px;font-size:.88em;color:#795548}
+.honesty{background:#e3f2fd;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.85em;color:#1565c0}
+
+/* Map */
+#map{width:100%;height:50vh;min-height:350px;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:16px;background:#e0e0e0}
+
+.footer{text-align:center;padding:30px;color:#bbb;font-size:.8em}
+
+@media(max-width:640px){
+  .hotel-card{flex-direction:column}
+  .hotel-icon{width:100%;height:60px}
+  .tab-btn{font-size:.78em;padding:12px 4px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>👫 济南 → 天津</h1>
+  <div class="sub">情侣周末慢旅行 · 两日攻略 ｜ 7月4日-5日</div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="plan">📋 行程</button>
+  <button class="tab-btn" data-tab="transport">🚄 车次</button>
+  <button class="tab-btn" data-tab="hotel">🏨 酒店</button>
+  <button class="tab-btn" data-tab="food">🍜 美食</button>
+  <button class="tab-btn" data-tab="photo">📸 景点</button>
+  <button class="tab-btn" data-tab="map">🗺️ 地图</button>
+  <button class="tab-btn" data-tab="tips">💡 提示</button>
+</div>
+
+<!-- 行程 -->
+<div class="tab-page active" id="tab-plan">
+<div class="container">
+  <div class="vibe-box">
+    <h2>🌸 这次旅行的节奏</h2>
+    <p>睡到自然醒，不赶景点，走到哪算哪。重要的不是打卡多少地方，而是两个人在一起的时光。</p>
+    <div class="vibe-tags">
+      <span>☀️ 自然醒</span><span>🚶 慢逛</span><span>🍽️ 好吃</span>
+      <span>📸 拍照</span><span>🌃 夜景</span><span>🌊 看海</span>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card"><h3>🕐 7月4日 周六出发</h3><ul><li>10:28 济南西出发（G2580）</li><li>高铁 1小时10分</li><li>11:38 到天津南 → 地铁去酒店</li></ul></div>
+    <div class="info-card"><h3>🏨 住哪里</h3><ul><li>⭐ 首推：桔子水晶酒店（⭐4.9）</li><li>📍 河东区新开路98号</li><li>步行可达意风区/天津站/海河</li></ul></div>
+    <div class="info-card"><h3>🔙 7月5日 周日返程</h3><ul><li>海边回来 → 酒店拿行李</li><li>16:34 天津南出发（G803）</li><li>17:40 到济南西</li></ul></div>
+  </div>
+
+  <div class="day-card day1">
+    <div class="day-header">🌹 Day 1 · 7月4日 周六 — 漫步老天津 · 海河夜色</div>
+    <div class="day-body"><div class="timeline">
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">10:28 - 11:38</span><h3>🚄 G2580 济南西 → 天津南</h3><p>二等座 ¥156/人，1小时10分就到了。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">11:45 - 12:10</span><h3>🚕 天津南站 → 酒店</h3><p>打车约25分钟，¥30左右。比地铁快且不用换乘拖着行李折腾。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">12:15 - 13:15</span><h3>🏨 酒店 check-in + 休息</h3><p>📍 桔子水晶酒店（河东区新开路98号）<br>放行李，洗把脸，休息一下。高铁+地铁折腾了一上午，先缓缓。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">13:20 - 14:20</span><h3>🍽️ 第一顿：西北角美食</h3><p>📍 红桥区西马路民族楼 · 酒店地铁1号线西北角站C口3分钟（轻装出门，行李放酒店）<br>天津本地人的美食聚集地，两个人边走边吃。</p><div class="tips"><strong>推荐：</strong>正味斋锅巴菜、穆记卷圈、二姐炸糕 · 两人 50-80 元</div></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">15:00 - 17:00</span><h3>🏛️ 五大道 · 慢慢逛</h3><p>梧桐树荫下百年小洋楼，走走停停拍拍照，找个咖啡馆坐坐。</p><div class="tips">📸 小洋楼 + 梧桐树 + 两个人 = 绝对出片</div></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">17:00 - 18:30</span><h3>🍽️ 晚餐：桂园餐厅（五大道店）</h3><p>📍 和平区成都道62号（张自忠旧宅旁）<br>必点：罾蹦鲤鱼、八珍豆腐。人均 80-120 元。</p></div>
+      <div class="tl"><div class="tl-dot night"></div><span class="time-tag">19:00 - 20:30</span><h3>🌃 意式风情区 · 夜色漫步</h3><p>📍 河北区自由道/民族路一带 · 酒店步行10分钟<br>红砖洋楼在暖黄灯光下特别浪漫，找家小酒馆坐下来喝一杯。</p></div>
+      <div class="tl"><div class="tl-dot night"></div><span class="time-tag">20:30 - 22:00</span><h3>🎡 天津之眼 + 海河边散步</h3><p>📍 河北区三岔河口永乐桥上 · 酒店步行15分钟<br>坐一圈摩天轮（约30分钟，70元/人），下来后沿河散步回酒店。</p><div class="tips">⚠️ 周末排队30-40分钟，可提前小程序买票</div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card day2">
+    <div class="day-header">☀️ Day 2 · 7月5日 周日 — 海边时光 · 慢慢回家</div>
+    <div class="day-body"><div class="timeline">
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">09:00 - 10:00</span><h3>🥞 自然醒 + 天津早餐</h3><p>📍 酒店附近居民区早餐摊<br>煎饼果子+锅巴菜，两人 20-30 元。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">10:00 - 10:30</span><h3>🏮 古文化街 · 逛伴手礼</h3><p>📍 南开区通北路 · 酒店步行15分钟<br>泥人张彩塑、杨柳青年画、天津麻花。30分钟速逛，给家人朋友带点伴手礼。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">10:45 - 11:00</span><h3>🚶 步行至天津站</h3><p>古文化街距天津站步行约15分钟，轻装出发，背包留在酒店。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">11:07 - 11:29</span><h3>🚇 C2565 天津站 → 滨海站</h3><p>城际列车二等座 ¥12/人，全程22分钟，不晕车。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">11:30 - 11:40</span><h3>🚕 滨海站 → 东疆湾沙滩</h3><p>打车约10分钟，轻装出行只带手机和防晒。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">11:40 - 13:30</span><h3>🏖️ 东疆湾沙滩 · 两个人的海边</h3><p>📍 滨海新区观澜路 · 门票约 50 元/人<br>踩沙踏浪吹海风，近2小时，不赶时间。</p><div class="tips">📸 沙滩、栈道、海浪，情侣照很出片 · 做好防晒</div></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">13:30 - 14:15</span><h3>🦐 海鲜午餐</h3><p>📍 东疆湾景区附近·推荐「渔家港湾(东疆湾店)」观澜路5555号<br>皮皮虾、蛏子、海螺。人均 100-150 元。选明码标价的店。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">14:20 - 14:30</span><h3>🚕 东疆湾 → 滨海站</h3><p>打车回滨海站。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">15:02 - 15:31</span><h3>🚇 C2580 滨海站 → 天津站</h3><p>城际列车二等座 ¥12/人，29分钟。车上休息。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">15:35 - 16:15</span><h3>🏨 回酒店取行李</h3><p>天津站步行10分钟回桔子水晶酒店，取行李、洗把脸、整理一下。从容不赶。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">16:15 - 16:40</span><h3>🚕 酒店 → 天津南站（打车）</h3><p>打车约25分钟，¥30左右。带着行李不用地铁换乘，直达天津南站候车。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">16:34 - 17:40</span><h3>🚄 G803 天津南 → 济南西</h3><p>二等座 ¥147/人，翻翻照片，聊聊下次去哪。17:40 到济南西 💕</p></div>
+    </div></div>
+  </div>
+</div>
+</div>
+
+<!-- 车次 -->
+<div class="tab-page" id="tab-transport">
+<div class="container">
+  <div class="honesty">✅ <strong>车次数据：</strong>以下车次为12306官网真实查询数据（2026年6月27日），以购票时实时信息为准。建议提前 3-5 天购票。</div>
+
+  <div class="section">
+    <div class="section-title">🚄 去程 · 7月4日 周六 · 济南西 → 天津南</div>
+    <div class="tip-box"><strong>💡 线路：</strong>京沪高铁线，G字头，约1小时-1小时20分，二等座约 ¥135-156。</div>
+    <table class="train-table">
+      <tr><th>车次</th><th>出发</th><th>到达</th><th>历时</th><th>二等座票价</th></tr>
+      <tr style="background:#fff5f5"><td><strong>G2580 ⭐推荐</strong></td><td>10:28 济南西</td><td>11:38 天津南</td><td>1h10m</td><td>¥156</td></tr>
+      <tr><td>G532</td><td>10:38 济南西</td><td>11:41 天津南</td><td>1h03m</td><td>¥156</td></tr>
+      <tr><td>G1566</td><td>09:44 济南西</td><td>10:47 天津南</td><td>1h03m</td><td>¥156</td></tr>
+      <tr><td>G1062</td><td>09:03 济南西</td><td>10:06 天津南</td><td>1h03m</td><td>¥156</td></tr>
+    </table>
+    <div class="tip-box">💡 以上为12306真实车次数据（2026.6.27查询），以购票时为准。建议提前购票，两人选 DF 连座。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🚄 返程 · 7月5日 周日 · 天津南 → 济南西</div>
+    <table class="train-table">
+      <tr><th>车次</th><th>出发</th><th>到达</th><th>历时</th><th>二等座票价</th></tr>
+      <tr style="background:#fff5f5"><td><strong>G803 ⭐推荐</strong></td><td>16:34 天津南</td><td>17:40 济南西</td><td>1h06m</td><td>¥147</td></tr>
+      <tr><td>G2575</td><td>14:30 天津南</td><td>15:37 济南西</td><td>1h07m</td><td>¥156</td></tr>
+      <tr><td>G29</td><td>18:33 天津南</td><td>19:31 济南西</td><td>58m</td><td>¥156</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🚇 城际列车 · 天津站 ↔ 滨海站</div>
+    <div class="tip-box"><strong>💡 C字头城际：</strong>二等座 ¥12/人，一等座 ¥20/人，约22-29分钟。每天28班，非常密集。<br><strong>到滨海站后：</strong>打短途车约10分钟到东疆湾沙滩。</div>
+    <div style="margin-bottom:14px"><strong style="font-size:.92em">推荐去程 · 7月5日上午</strong></div>
+    <table class="train-table">
+      <tr><th>车次</th><th>出发</th><th>到达</th><th>历时</th><th>二等座</th></tr>
+      <tr style="background:#fff5f5"><td><strong>C2565 ⭐推荐</strong></td><td>11:07 天津站</td><td>11:29 滨海站</td><td>22分钟</td><td>¥12</td></tr>
+      <tr><td>C2567</td><td>10:28 天津站</td><td>10:57 滨海站</td><td>29分钟</td><td>¥12</td></tr>
+      <tr><td>C2569</td><td>11:00 天津站</td><td>11:29 滨海站</td><td>29分钟</td><td>¥12</td></tr>
+    </table>
+    <div style="margin:18px 0 14px"><strong style="font-size:.92em">推荐返程 · 7月5日下午</strong></div>
+    <table class="train-table">
+      <tr><th>车次</th><th>出发</th><th>到达</th><th>历时</th><th>二等座</th></tr>
+      <tr style="background:#fff5f5"><td><strong>C2580 ⭐推荐</strong></td><td>15:02 滨海站</td><td>15:31 天津站</td><td>29分钟</td><td>¥12</td></tr>
+      <tr><td>C2576</td><td>14:36 滨海站</td><td>15:05 天津站</td><td>29分钟</td><td>¥12</td></tr>
+      <tr><td>C2582</td><td>15:59 滨海站</td><td>16:28 天津站</td><td>29分钟</td><td>¥12</td></tr>
+    </table>
+  </div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+    <a href="https://www.12306.cn" target="_blank" style="display:inline-block;background:#e91e63;color:#fff;padding:10px 22px;border-radius:24px;text-decoration:none;font-weight:600;font-size:.92em">🚄 12306 购票</a>
+  </div>
+</div>
+</div>
+
+<!-- 酒店 -->
+<div class="tab-page" id="tab-hotel">
+<div class="container">
+  <div class="honesty">⚠️ 价格为参考区间，以预订平台实时价格为准。建议在携程/美团/飞猪上对比。</div>
+  <div class="tip-box"><strong>📍 原则：</strong>住<strong>天津站/意式风情区附近</strong>，Day 1 晚上步行逛夜景，Day 2 坐城际方便、回酒店拿行李也方便。</div>
+
+  <div class="section">
+    <div class="section-title">⭐ 行程首推（综合评分最高）</div>
+    <div class="hotel-card" style="border:2px solid #e91e63"><div class="hotel-icon" style="background:linear-gradient(135deg,#ffecd2,#fcb69f)">💎</div><div class="hotel-info"><h3>桔子水晶酒店（天津站意大利风情区店）⭐ 首推</h3><div class="price">¥350-500/晚</div><div class="tags"><span class="tag">📍 河东区新开路98号</span><span class="tag">⭐ 4.9分</span><span class="tag">🎨 设计感</span></div><p>Day 1 步行可达意风区(8min)/天津之眼(15min)/海河 · Day 2 步行到天津站坐城际(10min) · 回酒店拿行李后地铁直达天津南站</p></div></div>
+  </div>
+  <div class="section">
+    <div class="section-title">💰 其他经济舒适型（200-400元/晚）</div>
+    <div class="hotel-card"><div class="hotel-icon" style="background:linear-gradient(135deg,#667eea,#764ba2)">🏨</div><div class="hotel-info"><h3>汉庭酒店（天津火车站意式风情街店）</h3><div class="price">¥220-320/晚</div><div class="tags"><span class="tag">📍 河北区平安街顾安里22门</span><span class="tag">⭐ 4.7分</span></div><p>距意风区步行5分钟，出门就是海河。性价比首选。</p></div></div>
+    <div class="hotel-card"><div class="hotel-icon" style="background:linear-gradient(135deg,#f093fb,#f5576c)">🏨</div><div class="hotel-info"><h3>全季酒店（天津火车站海河津湾店）</h3><div class="price">¥280-380/晚</div><div class="tags"><span class="tag">📍 河东区六经路11号海津大厦</span><span class="tag">⭐ 4.8分</span></div><p>华住中端品牌，海河边散步直接走回酒店。距天津站步行8分钟。</p></div></div>
+    <div class="hotel-card"><div class="hotel-icon" style="background:linear-gradient(135deg,#89f7fe,#66a6ff)">🏨</div><div class="hotel-info"><h3>天津站津湾广场亚朵酒店</h3><div class="price">¥300-450/晚</div><div class="tags"><span class="tag">📍 河北区龙门大厦A座1号</span><span class="tag">⭐ 4.7分</span></div><p>品质稳定，离天津站步行5分钟，第二天坐城际超方便。</p></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👑 高端奢华型（600元+/晚）</div>
+    <div class="hotel-card"><div class="hotel-icon" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)">👑</div><div class="hotel-info"><h3>天津丽思卡尔顿酒店</h3><div class="price">¥600-900/晚</div><div class="tags"><span class="tag">📍 五大道核心</span><span class="tag">⭐ 高端</span></div><p>五大道核心地段，服务一流。适合特别的日子。</p></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🏠 特色民宿</div>
+    <div class="hotel-card"><div class="hotel-icon" style="background:linear-gradient(135deg,#c3cfe2,#f5f7fa)">🏡</div><div class="hotel-info"><h3>五大道洋楼民宿</h3><div class="price">¥350-600/晚</div><div class="tags"><span class="tag">📍 五大道内</span><span class="tag">🏛️ 百年洋房</span></div><p>住在百年小洋楼里。在小红书/爱彼迎搜「天津五大道民宿」。</p></div></div>
+  </div>
+</div>
+</div>
+
+<!-- 美食 -->
+<div class="tab-page" id="tab-food">
+<div class="container">
+  <div class="section">
+    <div class="section-title">🍜 天津必吃美食</div>
+    <div class="food-card"><div class="food-emoji">🥞</div><div class="food-info"><h4>煎饼果子</h4><p>天津灵魂早餐，街边摊最正宗</p></div><div class="food-price">8-15元</div></div>
+    <div class="food-card"><div class="food-emoji">🍲</div><div class="food-info"><h4>锅巴菜</h4><p>配煎饼果子绝配</p></div><div class="food-price">8-12元</div></div>
+    <div class="food-card"><div class="food-emoji">🍩</div><div class="food-info"><h4>耳朵眼炸糕</h4><p>外酥里糯，趁热吃</p></div><div class="food-price">5-8元</div></div>
+    <div class="food-card"><div class="food-emoji">🥟</div><div class="food-info"><h4>狗不理包子</h4><p>天津名片，十八个褶</p></div><div class="food-price">50-80元/笼</div></div>
+    <div class="food-card"><div class="food-emoji">🐟</div><div class="food-info"><h4>罾蹦鲤鱼</h4><p>整鱼酥脆浇糖醋汁</p></div><div class="food-price">68-98元/份</div></div>
+    <div class="food-card"><div class="food-emoji">🦐</div><div class="food-info"><h4>北塘海鲜</h4><p>皮皮虾、梭子蟹、海螺</p></div><div class="food-price">100-150元/人</div></div>
+  </div>
+  <div class="section">
+    <div class="section-title">📍 去哪吃</div>
+    <div class="info-grid">
+      <div class="info-card"><h3>🔥 西北角美食街</h3><ul><li>📍 红桥区西马路民族楼</li><li>🚇 地铁1号线西北角站C口</li><li>本地人推荐，比食品街更地道</li><li>必吃：锅巴菜、卷圈、炸糕</li></ul></div>
+      <div class="info-card"><h3>🏮 南市食品街</h3><ul><li>📍 和平区慎益大街116号</li><li>一站式打卡，种类全</li><li>适合时间紧时集中品尝</li></ul></div>
+      <div class="info-card"><h3>🍽️ 桂园餐厅（五大道）</h3><ul><li>📍 和平区成都道62号</li><li>正宗天津菜馆</li><li>人均 ¥74 · 必点罾蹦鲤鱼</li></ul></div>
+      <div class="info-card"><h3>🦐 东疆湾海鲜</h3><ul><li>📍 滨海新区观澜路5555号</li><li>推荐「渔家港湾」人均¥113</li><li>皮皮虾、梭子蟹、海螺</li></ul></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- 景点 -->
+<div class="tab-page" id="tab-photo">
+<div class="container">
+  <div class="honesty">⚠️ 以下图片为网络素材，<strong>非景点实拍</strong>。建议在小红书搜索各景点名称查看真实照片。</div>
+  <div class="section">
+    <div class="section-title">📸 必打卡景点</div>
+    <div class="gallery">
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1583265627959-fb7042f5133b?w=600&h=375&fit=crop" alt="天津之眼"><div class="photo-label">🎡 天津之眼 — 建在桥上的摩天轮</div></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=600&h=375&fit=crop" alt="意式风情区"><div class="photo-label">🌃 意式风情区 — 红砖暖灯浪漫街角</div></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=375&fit=crop" alt="海边"><div class="photo-label">🏖️ 东疆湾沙滩 — 两个人的海边</div></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=600&h=375&fit=crop" alt="五大道"><div class="photo-label">🏛️ 五大道 — 梧桐树下走走停停</div></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=600&h=375&fit=crop" alt="海河夜景"><div class="photo-label">🌃 海河夜景 — 两岸灯火映水面</div></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=375&fit=crop" alt="古文化街"><div class="photo-label">🏮 古文化街 — 天津老城厢</div></div>
+    </div>
+  </div>
+  <div class="tip-box">🔍 看真实照片：<a href="https://www.xiaohongshu.com/search_result?keyword=天津之眼" target="_blank">天津之眼</a> · <a href="https://www.xiaohongshu.com/search_result?keyword=天津意式风情区" target="_blank">意风区</a> · <a href="https://www.xiaohongshu.com/search_result?keyword=天津五大道" target="_blank">五大道</a> · <a href="https://www.xiaohongshu.com/search_result?keyword=天津东疆湾" target="_blank">东疆湾</a></div>
+</div>
+</div>
+
+<!-- 地图 -->
+<div class="tab-page" id="tab-map">
+<div class="container">
+  <div class="section">
+    <div class="section-title">🗺️ 路线地图</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;font-size:.82em">
+      <span>🟣 行程景点</span><span>🟢 交通枢纽</span><span>🔴 美食地点</span><span>🔵 住宿推荐</span>
+    </div>
+    <div id="map">地图加载中...</div>
+    <div id="routeList"></div>
+  </div>
+</div>
+</div>
+
+<!-- 提示 -->
+<div class="tab-page" id="tab-tips">
+<div class="container">
+  <div class="section">
+    <div class="section-title">💰 预算参考（两人合计）</div>
+    <table class="budget-table">
+      <tr><th>项目</th><th>说明</th><th class="amt">费用</th></tr>
+      <tr><td>🚄 高铁往返</td><td>去程¥156+返程¥147 ×2人</td><td class="amt">¥606</td></tr>
+      <tr><td>🚇 城际列车</td><td>C字头 ¥12/人 ×2人 ×2趟</td><td class="amt">¥48</td></tr>
+      <tr><td>🏨 住宿</td><td>舒适型酒店一晚</td><td class="amt">¥300-600</td></tr>
+      <tr><td>🍽️ 餐饮</td><td>2天 5-6 顿</td><td class="amt">¥400-600</td></tr>
+      <tr><td>🎫 门票</td><td>天津之眼 + 东疆湾</td><td class="amt">¥240</td></tr>
+      <tr><td>🚗 市内交通</td><td>打车（天津南↔酒店×2 + 滨海×2）+ 地铁</td><td class="amt">¥80-130</td></tr>
+      <tr><td colspan="2"><strong>两人合计</strong></td><td class="amt">¥1,600-2,180</td></tr>
+    </table>
+  </div>
+  <div class="section">
+    <div class="section-title">💡 温馨提示</div>
+    <div class="note-box"><h4>🌊 关于看海</h4><p>天津的海在渤海湾，海水偏黄绿色。重在两个人一起吹海风的氛围感。</p></div>
+    <div class="note-box"><h4>🎫 提前买票</h4><p>高铁票、酒店提前 3-5 天预订。天津之眼可提前小程序买票。</p></div>
+    <div class="note-box"><h4>☀️ 防晒</h4><p>6月底 30°C+，带好防晒霜、墨镜、帽子。</p></div>
+    <div class="note-box"><h4>🚕 出行方式</h4><p>带行李时打车（天津南↔酒店、滨海站↔沙滩），轻装时地铁/步行（酒店→西北角、古文化街→天津站等）。城际/高铁全程轨道交通。</p></div>
+  </div>
+</div>
+</div>
+
+<div class="footer">💕 济南→天津 情侣周末慢旅行 ｜ 2026年7月4-5日<br>重要的不是去哪，是和谁一起<br><br>⚠️ 车次数据来源：12306官网（2026.6.27查询），以购票时为准</div>
+
+<script>
+// Tab switching - simple and reliable
+document.querySelector('.tab-bar').addEventListener('click', function(e) {
+  var btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  var name = btn.getAttribute('data-tab');
+  // Hide all pages
+  var pages = document.querySelectorAll('.tab-page');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+  // Deactivate all buttons
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  // Show selected
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  // Lazy load map
+  if (name === 'map' && !window._mapInit) loadMap();
+});
+
+// Lazy load Leaflet and init map
+function loadMap() {
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(link);
+  var script = document.createElement('script');
+  script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  script.onload = function() { initMap(); };
+  script.onerror = function() { document.getElementById('map').innerHTML = '<p style="padding:40px;text-align:center;color:#999">地图加载失败，请检查网络</p>'; };
+  document.head.appendChild(script);
+}
+
+var stops = [
+  // === Day 1 ===
+  {day:1,name:"济南西站",time:"10:28",desc:"G2580出发 · 二等座¥156/人",lat:36.6533,lng:116.8422,color:"#4caf50",icon:"🚄",cat:"station"},
+  {day:1,name:"天津南站",time:"11:38",desc:"抵达 · 地铁3号线转1号线到西北角",lat:39.038,lng:117.07,color:"#4caf50",icon:"🚉",cat:"station"},
+  {day:1,name:"西北角美食街",time:"12:00-13:00",desc:"📍红桥区西马路民族楼 · 锅巴菜、卷圈、炸糕",lat:39.1428,lng:117.1747,color:"#e91e63",icon:"🍽️",cat:"food"},
+  {day:1,name:"五大道",time:"15:30-17:30",desc:"百年小洋楼 · 梧桐树荫",lat:39.12,lng:117.195,color:"#9c27b0",icon:"🏛️",cat:"spot"},
+  {day:1,name:"桂园餐厅",time:"17:30-19:00",desc:"📍成都道62号 · 天津菜人均¥74",lat:39.119,lng:117.198,color:"#e91e63",icon:"🍽️",cat:"food"},
+  {day:1,name:"意式风情区",time:"19:00-20:30",desc:"红砖洋楼 · 夜色浪漫",lat:39.139,lng:117.205,color:"#9c27b0",icon:"🌃",cat:"spot"},
+  {day:1,name:"天津之眼",time:"20:30-22:00",desc:"永乐桥摩天轮 · ¥70/人",lat:39.152,lng:117.178,color:"#9c27b0",icon:"🎡",cat:"spot"},
+  // === Day 2 ===
+  {day:2,name:"古文化街",time:"10:00-10:30",desc:"泥人张·杨柳青年画",lat:39.142,lng:117.182,color:"#9c27b0",icon:"🏮",cat:"spot"},
+  {day:2,name:"天津站",time:"11:07",desc:"C2565城际出发 · ¥12/人",lat:39.1367,lng:117.2117,color:"#4caf50",icon:"🚉",cat:"station"},
+  {day:2,name:"滨海站",time:"11:29",desc:"城际到达 · 打车10分钟到沙滩",lat:39.085,lng:117.68,color:"#4caf50",icon:"🚇",cat:"station"},
+  {day:2,name:"东疆湾沙滩",time:"11:40-13:30",desc:"📍观澜路 · 门票¥50/人",lat:39.058,lng:117.72,color:"#9c27b0",icon:"🏖️",cat:"spot"},
+  {day:2,name:"渔家港湾海鲜",time:"13:30-14:00",desc:"📍观澜路5555号 · 人均¥113",lat:39.06,lng:117.715,color:"#e91e63",icon:"🦐",cat:"food"},
+  {day:2,name:"滨海站(返)",time:"15:02",desc:"C2580返程 · ¥12/人",lat:39.085,lng:117.685,color:"#4caf50",icon:"🚇",cat:"station"},
+  {day:2,name:"天津南站(返)",time:"16:34",desc:"G803返程 · ¥147/人",lat:39.038,lng:117.072,color:"#4caf50",icon:"🚄",cat:"station"},
+  {day:2,name:"济南西站(到家)",time:"17:40",desc:"到家 💕",lat:36.6533,lng:116.8422,color:"#4caf50",icon:"🏠",cat:"station"},
+  // === Hotels (non-day, always visible) ===
+  {day:0,name:"汉庭酒店",time:"¥220-320/晚",desc:"📍河北区平安街顾安里22门 · ⭐4.7",lat:39.141,lng:117.204,color:"#2196f3",icon:"🏨",cat:"hotel"},
+  {day:0,name:"全季酒店",time:"¥280-380/晚",desc:"📍河东区六经路11号海津大厦 · ⭐4.8",lat:39.138,lng:117.215,color:"#2196f3",icon:"🏨",cat:"hotel"},
+  {day:0,name:"桔子水晶酒店 ⭐首推",time:"¥350-500/晚",desc:"📍河东区新开路98号 · ⭐4.9",lat:39.136,lng:117.22,color:"#e91e63",icon:"💎",cat:"hotel"},
+  {day:0,name:"亚朵酒店",time:"¥300-450/晚",desc:"📍河北区龙门大厦A座 · ⭐4.7",lat:39.137,lng:117.213,color:"#2196f3",icon:"🏨",cat:"hotel"},
+  // === Food locations ===
+  {day:0,name:"南市食品街",time:"",desc:"📍和平区慎益大街116号 · 一站式打卡",lat:39.128,lng:117.185,color:"#e91e63",icon:"🏮",cat:"food"}
+];
+function initMap() {
+  window._mapInit = true;
+  var map = L.map('map').setView([39.12,117.35],10);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(map);
+  var d1=[],d2=[];
+  stops.forEach(function(s){
+    var size = s.cat==='hotel' ? 24 : 28;
+    var icon=L.divIcon({className:'',html:'<div style="background:'+s.color+';width:'+size+'px;height:'+size+'px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:'+(s.cat==='hotel'?12:14)+'px;box-shadow:0 2px 6px rgba(0,0,0,.3);border:2px solid #fff">'+s.icon+'</div>',iconSize:[size,size],iconAnchor:[size/2,size/2]});
+    var popup = '<b>'+s.icon+' '+s.name+'</b><br><span style="color:#e91e63">'+s.time+'</span><br>'+s.desc;
+    if(s.cat==='hotel') popup += '<br><a href="https://www.ctrip.com" target="_blank" style="font-size:.8em;color:#2196f3">携程预订 →</a>';
+    L.marker([s.lat,s.lng],{icon:icon}).addTo(map).bindPopup(popup);
+    if(s.day===1)d1.push([s.lat,s.lng]);
+    if(s.day===2)d2.push([s.lat,s.lng]);
+  });
+  L.polyline(d1,{color:'#e91e63',weight:3,opacity:.6,dashArray:'8,8'}).addTo(map);
+  L.polyline(d2,{color:'#ff9800',weight:3,opacity:.6,dashArray:'8,8'}).addTo(map);
+  // Fit bounds to Tianjin area (exclude Jinan)
+  var tjStops = stops.filter(function(s){return s.lat > 38});
+  map.fitBounds(tjStops.map(function(s){return[s.lat,s.lng]}),{padding:[40,40]});
+  // Route list
+  var html='',cur=0,num=0;
+  stops.forEach(function(s,i){
+    if(s.day!==cur){cur=s.day;var label=cur===1?'🌹 Day 1':cur===2?'☀️ Day 2':'🏨 住宿 & 美食';html+='<div style="font-weight:700;color:#e91e63;margin:16px 0 8px;padding-bottom:6px;border-bottom:1px solid #fce4ec">'+label+'</div>';}
+    num++;
+    html+='<div style="display:flex;gap:10px;padding:6px 0;align-items:flex-start;cursor:pointer" onclick="document.querySelector(\'.leaflet-container\').__leaflet_map.flyTo(['+s.lat+','+s.lng+'],14)"><div style="width:24px;height:24px;border-radius:50%;background:'+s.color+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">'+num+'</div><div><b style="font-size:.88em">'+s.icon+' '+s.name+'</b><br><span style="font-size:.78em;color:#999">'+s.time+'｜'+s.desc+'</span></div></div>';
+  });
+  document.getElementById('routeList').innerHTML=html;
+  map.__leaflet_map = map;
+}
+</script>
+</body>
+</html>
