@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>济南→青岛 追蓝眼泪攻略</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#faf8f6;color:#444;line-height:1.85;font-size:15px}
+.hero{background:linear-gradient(135deg,#1a237e,#00bcd4);color:#fff;padding:50px 30px;text-align:center}
+.hero h1{font-size:2.4em;font-weight:900}
+.hero .sub{opacity:.92;margin-top:6px;font-size:1.05em}
+
+/* Tabs */
+.tab-bar{display:flex;background:#2c2c3a;position:sticky;top:0;z-index:100}
+.tab-btn{flex:1;padding:14px 8px;text-align:center;color:rgba(255,255,255,.6);cursor:pointer;font-size:.88em;font-weight:600;border:none;background:none;white-space:nowrap;border-bottom:3px solid transparent}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,.05)}
+.tab-btn.active{color:#fff;border-bottom-color:#1565c0;background:rgba(255,255,255,.08)}
+.tab-page{display:none}
+.tab-page.active{display:block}
+
+.container{max-width:880px;margin:0 auto;padding:30px 20px}
+.section{margin-bottom:36px}
+.section-title{font-size:1.4em;font-weight:700;color:#2c2c3a;margin-bottom:16px}
+
+/* Cards */
+.day-card{background:#fff;border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.06);overflow:hidden;margin-bottom:26px}
+.day-header{padding:16px 24px;color:#fff;font-size:1.15em;font-weight:700}
+.day1 .day-header{background:linear-gradient(135deg,#1a237e,#00bcd4)}
+.day2 .day-header{background:linear-gradient(135deg,#01579b,#00bcd4)}
+.day-body{padding:22px 24px}
+
+/* Timeline */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2.5px;background:linear-gradient(to bottom,#1565c0,#e0e0e0);border-radius:2px}
+.tl{position:relative;margin-bottom:22px}
+.tl:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-23px;top:5px;width:13px;height:13px;border-radius:50%;background:#1565c0;border:2.5px solid #fff;box-shadow:0 0 0 2px #1565c0}
+.tl-dot.food{background:#1565c0;box-shadow:0 0 0 2px #1565c0}
+.tl-dot.transport{background:#4caf50;box-shadow:0 0 0 2px #4caf50}
+.tl-dot.night{background:#3f51b5;box-shadow:0 0 0 2px #3f51b5}
+.time-tag{display:inline-block;background:#e8eaf6;color:#1565c0;padding:1px 10px;border-radius:14px;font-size:.8em;font-weight:600;margin-bottom:4px}
+.tl h3{font-size:1.02em;font-weight:700;color:#2c2c3a;margin-bottom:2px}
+.tl p{color:#888;font-size:.9em}
+.tips{background:#fff8e1;border-left:3px solid #ffc107;padding:7px 11px;margin-top:7px;border-radius:0 8px 8px 0;font-size:.84em;color:#795548}
+
+/* Info grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.info-card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.info-card h3{font-size:.98em;margin-bottom:8px}
+.info-card ul{list-style:none;padding:0}
+.info-card li{padding:2px 0;padding-left:14px;position:relative;color:#888;font-size:.88em}
+.info-card li::before{content:'•';position:absolute;left:0;color:#1565c0;font-weight:bold}
+
+/* Vibe */
+.vibe-box{background:linear-gradient(135deg,#fff5f5,#ffeaa7);border-radius:18px;padding:24px;text-align:center;margin-bottom:26px}
+.vibe-box h2{font-size:1.2em;color:#1565c0;margin-bottom:8px}
+.vibe-box p{color:#7f8c8d;font-size:.9em}
+.vibe-tags{margin-top:12px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.vibe-tags span{background:#fff;padding:4px 14px;border-radius:16px;font-size:.82em;color:#1565c0;font-weight:500}
+
+/* Tables */
+.train-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:14px}
+.train-table th{background:#1565c0;color:#fff;padding:11px 14px;text-align:left;font-size:.85em;font-weight:600}
+.train-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.88em}
+.train-table tr:last-child td{border-bottom:none}
+.budget-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.budget-table th{background:#1565c0;color:#fff;padding:11px 14px;text-align:left;font-size:.88em}
+.budget-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.9em}
+.budget-table tr:last-child td{border-bottom:none;background:#e8eaf6;font-weight:700}
+.amt{text-align:right;color:#1565c0;font-weight:600}
+
+/* Hotel */
+.hotel-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:14px;display:flex}
+.hotel-icon{width:90px;display:flex;align-items:center;justify-content:center;font-size:2.4em;flex-shrink:0}
+.hotel-info{padding:14px 18px;flex:1}
+.hotel-info h3{font-size:1em;font-weight:700;color:#2c2c3a;margin-bottom:3px}
+.hotel-info .price{color:#1565c0;font-weight:700;font-size:1.05em}
+.hotel-info .tags{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0}
+.hotel-info .tag{background:#f5f0eb;padding:1px 8px;border-radius:8px;font-size:.72em;color:#888}
+.hotel-info p{font-size:.84em;color:#666}
+
+/* Food */
+.food-card{background:#fff;border-radius:18px;padding:14px 18px;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.food-emoji{font-size:1.6em}
+.food-info h4{font-weight:700;font-size:.9em}
+.food-info p{font-size:.82em;color:#888}
+.food-price{margin-left:auto;color:#1565c0;font-weight:700;font-size:.95em;white-space:nowrap}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.photo-card{border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);position:relative;aspect-ratio:16/10;background:#e0e0e0}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.65));color:#fff;padding:16px 12px 8px;font-size:.85em;font-weight:500}
+
+/* Note boxes */
+.note-box{background:#fff;border-left:4px solid #e91e63;border-radius:0 18px 18px 0;padding:14px 18px;margin-bottom:12px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.note-box h4{color:#1565c0;margin-bottom:3px;font-size:.92em}
+.note-box p{font-size:.85em;color:#888}
+.tip-box{background:#fff8e1;border-left:4px solid #ffc107;border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px;font-size:.88em;color:#795548}
+.honesty{background:#e3f2fd;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.85em;color:#1565c0}
+
+/* Map */
+#map{width:100%;height:50vh;min-height:350px;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:16px;background:#e0e0e0}
+
+.footer{text-align:center;padding:30px;color:#bbb;font-size:.8em}
+
+@media(max-width:640px){
+  .hotel-card{flex-direction:column}
+  .hotel-icon{width:100%;height:60px}
+  .tab-btn{font-size:.78em;padding:12px 4px}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>🌊 济南 → 青岛</h1>
+  <div class="sub">追蓝眼泪 · 海滨夜游攻略 ｜ 8月-9月</div>
+</div>
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="plan">📋 行程</button>
+  <button class="tab-btn" data-tab="transport">🚄 车次</button>
+  <button class="tab-btn" data-tab="hotel">🏨 酒店</button>
+  <button class="tab-btn" data-tab="tips">💡 追泪攻略</button>
+</div>
+
+<div class="tab-page active" id="tab-plan">
+<div class="container">
+  <div class="vibe-box">
+    <h2>🌊 青岛追蓝眼泪</h2>
+    <p>青岛是北方最热门的蓝眼泪观赏地之一。白天逛老城栈桥八大关，凌晨在海边等待那抹蓝色荧光。</p>
+    <div class="vibe-tags">
+      <span>🌊 蓝眼泪</span><span>🏖️ 海滩</span><span>🌃 夜海</span>
+      <span>🏛️ 老城</span><span>🦐 海鲜</span><span>🍺 啤酒</span>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card"><h3>🕐 出发</h3><ul><li>济南东/济南站出发</li><li>高铁约 1.5-2 小时</li><li>到青岛站/青岛北站</li></ul></div>
+    <div class="info-card"><h3>🌊 蓝眼泪地点</h3><ul><li>📍 八大峡附近海滩</li><li>📍 琅琊台</li><li>📍 仰口海滩</li></ul></div>
+    <div class="info-card"><h3>⏰ 最佳时间</h3><ul><li>8-9月高发期</li><li>凌晨 00:00-03:00</li><li>晴朗无风夜晚</li></ul></div>
+  </div>
+
+  <div class="day-card day1">
+    <div class="day-header">🌊 Day 1 — 老城漫步 · 夜追蓝眼泪</div>
+    <div class="day-body"><div class="timeline">
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">09:00 - 11:00</span><h3>🚄 济南 → 青岛</h3><p>高铁约1.5-2小时，二等座约¥120-150。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">11:00 - 11:30</span><h3>🚕 到酒店放行李</h3><p>建议住市南区栈桥/八大关附近。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">12:00 - 13:00</span><h3>🍽️ 午餐：劈柴院/营口路啤酒街</h3><p>辣炒蛤蜊、鲅鱼水饺、原浆啤酒。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">13:30 - 15:30</span><h3>🏛️ 栈桥 + 小鱼山</h3><p>青岛标志栈桥，小鱼山俯瞰老城红瓦绿树。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">15:30 - 17:30</span><h3>🏛️ 八大关 · 万国建筑</h3><p>花石楼、公主楼，梧桐树荫下漫步。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">18:00 - 19:30</span><h3>🍽️ 晚餐：台东步行街</h3><p>烤鱿鱼、海鲜大咖、青岛啤酒。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">20:00 - 22:00</span><h3>🏨 回酒店休息</h3><p>睡一觉，凌晨起来追泪！设好闹钟。</p></div>
+      <div class="tl"><div class="tl-dot night"></div><span class="time-tag">23:30 - 02:00</span><h3>🌊 八大峡海滩 · 追蓝眼泪！</h3><p>📍 八大峡附近海滩（2023年9月曾大规模出现）<br>海浪泛起蓝色荧光，如梦如幻。</p><div class="tips">📸 手机专业模式ISO 3200+快门3秒 · 相机三脚架长曝光<br>⚠️ 深夜海边注意安全，结伴而行，远离礁石</div></div>
+      <div class="tl"><div class="tl-dot night"></div><span class="time-tag">02:00 - 02:30</span><h3>🚕 回酒店</h3><p>带着蓝色的回忆入睡 💙</p></div>
+    </div></div>
+  </div>
+
+  <div class="day-card day2">
+    <div class="day-header">☀️ Day 2 — 崂山/啤酒 · 慢慢回家</div>
+    <div class="day-body"><div class="timeline">
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">10:00 - 11:00</span><h3>🥞 自然醒 + 早餐</h3><p>昨晚追泪到凌晨，睡到自然醒。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">11:00 - 13:00</span><h3>🍺 青岛啤酒博物馆</h4><p>📍 市北区登州路56号 · 门票约50-60元<br>了解啤酒历史，品尝原浆啤酒。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">13:00 - 14:00</span><h3>🍽️ 午餐：登州路啤酒街</h3><p>啤酒配海鲜，辣炒蛤蜊+烤鱿鱼。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">14:30 - 15:00</span><h3>🚕 前往青岛站</h3><p>打车约15分钟。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">15:30 - 17:30</span><h3>🚄 青岛 → 济南</h3><p>高铁约1.5-2小时。回味昨晚的蓝色海浪 💙</p></div>
+    </div></div>
+  </div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-transport">
+<div class="container">
+  <div class="honesty">✅ 车次以12306实时查询为准。</div>
+  <div class="section">
+    <div class="section-title">🚄 济南 ↔ 青岛 高铁</div>
+    <div class="tip-box"><strong>💡 线路：</strong>济青高铁，G/D字头，约1.5-2小时。出发站：济南站/济南东站。到达站：青岛站/青岛北站。</div>
+    <table class="train-table">
+      <tr><th>类型</th><th>历时</th><th>二等座</th><th>一等座</th><th>备注</th></tr>
+      <tr style="background:#e8eaf6"><td><strong>G字头高速</strong></td><td>约1.5小时</td><td>¥140-150</td><td>¥220-240</td><td>最快</td></tr>
+      <tr><td>D字头动车</td><td>约2小时</td><td>¥120-130</td><td>¥190-200</td><td>性价比高</td></tr>
+    </table>
+    <div class="tip-box">💡 建议到<strong>青岛站</strong>（市南区，靠近栈桥/八大关），比青岛北站更方便。</div>
+  </div>
+  <div style="margin-top:20px"><a href="https://www.12306.cn" target="_blank" style="display:inline-block;background:#1565c0;color:#fff;padding:10px 22px;border-radius:24px;text-decoration:none;font-weight:600;font-size:.92em">🚄 12306 购票</a></div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-hotel">
+<div class="container">
+  <div class="tip-box"><strong>📍 原则：</strong>住<strong>市南区</strong>（栈桥/八大关/中山路附近），离蓝眼泪观赏点八大峡近，步行可达。</div>
+  <div class="section">
+    <div class="section-title">⭐ 推荐住宿</div>
+    <div class="info-grid">
+      <div class="info-card"><h3>🏨 栈桥/中山路</h3><ul><li>离八大峡最近</li><li>步行可达栈桥、劈柴院</li><li>经济型 ¥200-350/晚</li></ul></div>
+      <div class="info-card"><h3>🏨 八大关附近</h3><li>环境最好，海景房多</li><li>离八大峡打车10分钟</li><li>舒适型 ¥350-600/晚</li></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-tips">
+<div class="container">
+  <div class="section">
+    <div class="section-title">🌊 青岛蓝眼泪观赏攻略</div>
+    <div class="vibe-box">
+      <h2>青岛蓝眼泪</h2>
+      <p>青岛是北方观赏蓝眼泪的热门城市，尤其8-9月高发期，多次被市民拍到壮观的蓝色荧光海浪。</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card"><h3>📍 观赏地点</h3><ul><li><strong>八大峡</strong> — 2023.9.5大规模出现</li><li><strong>琅琊台</strong> — 人少，光污染低</li><li><strong>仰口海滩</strong> — 崂山区</li><li>其他青岛沿海区域</li></ul></div>
+      <div class="info-card"><h3>⏰ 最佳时间</h3><ul><li><strong>8-9月</strong>高发期</li><li>凌晨 00:00-03:00 效果最佳</li><li>晴朗无风的夜晚</li><li>退潮时更容易看到</li></ul></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">📸 拍摄 & 注意事项</div>
+    <div class="note-box"><h4>📱 拍摄</h4><p>手机专业模式：ISO 3200，快门3秒。相机：三脚架+f/2.8+ISO 1600+曝光8-15秒。用石头扔海面可激发蓝光。</p></div>
+    <div class="note-box"><h4>⚠️ 安全</h4><p>深夜海边结伴而行！远离礁石和悬崖。穿防滑鞋，带手电筒。不要下水。关注实时追泪群/公众号。</p></div>
+    <div class="note-box"><h4>🌡️ 概率</h4><p>蓝眼泪是自然现象，不保证每天可见。建议关注「青岛蓝眼泪」相关公众号/小红书获取实时消息。</p></div>
+  </div>
+  <div class="section">
+    <div class="section-title">💰 预算参考（两人合计）</div>
+    <table class="budget-table">
+      <tr><th>项目</th><th>说明</th><th style="text-align:right">费用</th></tr>
+      <tr><td>🚄 高铁往返</td><td>约¥130 ×2人 ×2趟</td><td style="text-align:right;color:#1565c0;font-weight:600">¥520</td></tr>
+      <tr><td>🏨 住宿</td><td>一晚</td><td style="text-align:right;color:#1565c0;font-weight:600">¥200-500</td></tr>
+      <tr><td>🍽️ 餐饮</td><td>2天</td><td style="text-align:right;color:#1565c0;font-weight:600">¥300-500</td></tr>
+      <tr><td>🎫 门票</td><td>啤酒博物馆</td><td style="text-align:right;color:#1565c0;font-weight:600">¥120</td></tr>
+      <tr><td>🚗 交通</td><td>打车+地铁</td><td style="text-align:right;color:#1565c0;font-weight:600">¥80-120</td></tr>
+      <tr><td colspan="2"><strong>两人合计</strong></td><td style="text-align:right;color:#1565c0;font-weight:700">¥1,220-1,760</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<div class="footer">💙 济南→青岛 追蓝眼泪 ｜ 8-9月高发期<br>凌晨的海边，一起等那抹蓝色荧光<br><br>⚠️ 蓝眼泪为自然现象，不保证每天可见</div>
+
+<script>
+document.querySelector('.tab-bar').addEventListener('click', function(e) {
+  var btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  var name = btn.getAttribute('data-tab');
+  var pages = document.querySelectorAll('.tab-page');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+});
+</script>
+</body>
+</html>

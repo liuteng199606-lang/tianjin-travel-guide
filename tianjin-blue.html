@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>济南→天津 追蓝眼泪攻略</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#faf8f6;color:#444;line-height:1.85;font-size:15px}
+.hero{background:linear-gradient(135deg,#0d47a1,#00bcd4);color:#fff;padding:50px 30px;text-align:center}
+.hero h1{font-size:2.4em;font-weight:900}
+.hero .sub{opacity:.92;margin-top:6px;font-size:1.05em}
+
+/* Tabs */
+.tab-bar{display:flex;background:#2c2c3a;position:sticky;top:0;z-index:100}
+.tab-btn{flex:1;padding:14px 8px;text-align:center;color:rgba(255,255,255,.6);cursor:pointer;font-size:.88em;font-weight:600;border:none;background:none;white-space:nowrap;border-bottom:3px solid transparent}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,.05)}
+.tab-btn.active{color:#fff;border-bottom-color:#0288d1;background:rgba(255,255,255,.08)}
+.tab-page{display:none}
+.tab-page.active{display:block}
+
+.container{max-width:880px;margin:0 auto;padding:30px 20px}
+.section{margin-bottom:36px}
+.section-title{font-size:1.4em;font-weight:700;color:#2c2c3a;margin-bottom:16px}
+
+/* Cards */
+.day-card{background:#fff;border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.06);overflow:hidden;margin-bottom:26px}
+.day-header{padding:16px 24px;color:#fff;font-size:1.15em;font-weight:700}
+.day1 .day-header{background:linear-gradient(135deg,#0d47a1,#00bcd4)}
+.day2 .day-header{background:linear-gradient(135deg,#0097a7,#26c6da)}
+.day-body{padding:22px 24px}
+
+/* Timeline */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2.5px;background:linear-gradient(to bottom,#0288d1,#e0e0e0);border-radius:2px}
+.tl{position:relative;margin-bottom:22px}
+.tl:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-23px;top:5px;width:13px;height:13px;border-radius:50%;background:#0288d1;border:2.5px solid #fff;box-shadow:0 0 0 2px #0288d1}
+.tl-dot.food{background:#0288d1;box-shadow:0 0 0 2px #0288d1}
+.tl-dot.transport{background:#4caf50;box-shadow:0 0 0 2px #4caf50}
+.tl-dot.night{background:#3f51b5;box-shadow:0 0 0 2px #3f51b5}
+.time-tag{display:inline-block;background:#e1f5fe;color:#0288d1;padding:1px 10px;border-radius:14px;font-size:.8em;font-weight:600;margin-bottom:4px}
+.tl h3{font-size:1.02em;font-weight:700;color:#2c2c3a;margin-bottom:2px}
+.tl p{color:#888;font-size:.9em}
+.tips{background:#fff8e1;border-left:3px solid #ffc107;padding:7px 11px;margin-top:7px;border-radius:0 8px 8px 0;font-size:.84em;color:#795548}
+
+/* Info grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.info-card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.info-card h3{font-size:.98em;margin-bottom:8px}
+.info-card ul{list-style:none;padding:0}
+.info-card li{padding:2px 0;padding-left:14px;position:relative;color:#888;font-size:.88em}
+.info-card li::before{content:'•';position:absolute;left:0;color:#0288d1;font-weight:bold}
+
+/* Vibe */
+.vibe-box{background:linear-gradient(135deg,#fff5f5,#ffeaa7);border-radius:18px;padding:24px;text-align:center;margin-bottom:26px}
+.vibe-box h2{font-size:1.2em;color:#0288d1;margin-bottom:8px}
+.vibe-box p{color:#7f8c8d;font-size:.9em}
+.vibe-tags{margin-top:12px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.vibe-tags span{background:#fff;padding:4px 14px;border-radius:16px;font-size:.82em;color:#0288d1;font-weight:500}
+
+/* Tables */
+.train-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:14px}
+.train-table th{background:#0288d1;color:#fff;padding:11px 14px;text-align:left;font-size:.85em;font-weight:600}
+.train-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.88em}
+.train-table tr:last-child td{border-bottom:none}
+.budget-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.budget-table th{background:#0288d1;color:#fff;padding:11px 14px;text-align:left;font-size:.88em}
+.budget-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.9em}
+.budget-table tr:last-child td{border-bottom:none;background:#e3f2fd;font-weight:700}
+.amt{text-align:right;color:#0288d1;font-weight:600}
+
+/* Hotel */
+.hotel-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:14px;display:flex}
+.hotel-icon{width:90px;display:flex;align-items:center;justify-content:center;font-size:2.4em;flex-shrink:0}
+.hotel-info{padding:14px 18px;flex:1}
+.hotel-info h3{font-size:1em;font-weight:700;color:#2c2c3a;margin-bottom:3px}
+.hotel-info .price{color:#0288d1;font-weight:700;font-size:1.05em}
+.hotel-info .tags{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0}
+.hotel-info .tag{background:#f5f0eb;padding:1px 8px;border-radius:8px;font-size:.72em;color:#888}
+.hotel-info p{font-size:.84em;color:#666}
+
+/* Food */
+.food-card{background:#fff;border-radius:18px;padding:14px 18px;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.food-emoji{font-size:1.6em}
+.food-info h4{font-weight:700;font-size:.9em}
+.food-info p{font-size:.82em;color:#888}
+.food-price{margin-left:auto;color:#0288d1;font-weight:700;font-size:.95em;white-space:nowrap}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.photo-card{border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);position:relative;aspect-ratio:16/10;background:#e0e0e0}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.65));color:#fff;padding:16px 12px 8px;font-size:.85em;font-weight:500}
+
+/* Note boxes */
+.note-box{background:#fff;border-left:4px solid #e91e63;border-radius:0 18px 18px 0;padding:14px 18px;margin-bottom:12px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.note-box h4{color:#0288d1;margin-bottom:3px;font-size:.92em}
+.note-box p{font-size:.85em;color:#888}
+.tip-box{background:#fff8e1;border-left:4px solid #ffc107;border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px;font-size:.88em;color:#795548}
+.honesty{background:#e3f2fd;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.85em;color:#1565c0}
+
+/* Map */
+#map{width:100%;height:50vh;min-height:350px;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:16px;background:#e0e0e0}
+
+.footer{text-align:center;padding:30px;color:#bbb;font-size:.8em}
+
+@media(max-width:640px){
+  .hotel-card{flex-direction:column}
+  .hotel-icon{width:100%;height:60px}
+  .tab-btn{font-size:.78em;padding:12px 4px}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>🌊 济南 → 天津</h1>
+  <div class="sub">追蓝眼泪 · 情侣夜游攻略 ｜ 7月4日-5日</div>
+</div>
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="plan">📋 行程</button>
+  <button class="tab-btn" data-tab="transport">🚄 车次</button>
+  <button class="tab-btn" data-tab="hotel">🏨 酒店</button>
+  <button class="tab-btn" data-tab="tips">💡 追泪攻略</button>
+</div>
+
+<div class="tab-page active" id="tab-plan">
+<div class="container">
+  <div class="vibe-box">
+    <h2>🌊 追蓝眼泪的节奏</h2>
+    <p>白天逛天津老城，傍晚奔赴海边，等待那片蓝色荧光海浪。重要的是两个人一起追光的浪漫。</p>
+    <div class="vibe-tags">
+      <span>🌊 蓝眼泪</span><span>🌙 夜海</span><span>📸 长曝光</span>
+      <span>🌃 夜景</span><span>🚶 慢逛</span><span>🍽️ 好吃</span>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card"><h3>🕐 出发</h3><ul><li>10:28 济南西出发（G2580）</li><li>高铁 1h10min</li><li>11:38 到天津南</li></ul></div>
+    <div class="info-card"><h3>🌊 蓝眼泪</h3><ul><li>📍 东疆湾/临港海岸线公园</li><li>⏰ 19:00-22:00</li><li>7月可见（4-6月高发）</li></ul></div>
+    <div class="info-card"><h3>🔙 返程</h3><ul><li>海边回来 → 酒店取行李</li><li>16:34 天津南出发（G803）</li><li>17:40 到济南西</li></ul></div>
+  </div>
+
+  <div class="day-card day1">
+    <div class="day-header">🌊 Day 1 · 7月4日 周六 — 漫步天津 · 夜追蓝眼泪</div>
+    <div class="day-body"><div class="timeline">
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">10:28 - 11:38</span><h3>🚄 G2580 济南西 → 天津南</h3><p>二等座 ¥156/人。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">11:45 - 12:10</span><h3>🚕 天津南站 → 酒店</h3><p>打车约25分钟，¥30左右。住滨海新区，离蓝眼泪观赏点近。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">12:15 - 14:00</span><h3>🏨 酒店 check-in + 休息</h3><p>放行李，休息一下。下午和晚上还有重头戏。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">14:00 - 15:00</span><h3>🍽️ 午餐</h3><p>酒店附近吃点天津特色，煎饼果子、锅巴菜。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">15:30 - 18:00</span><h3>🏛️ 五大道 · 慢慢逛</h3><p>梧桐树荫下百年小洋楼，走走停停拍拍照。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">18:00 - 19:00</span><h3>🍽️ 晚餐：桂园餐厅</h3><p>📍 和平区成都道62号 · 罾蹦鲤鱼、八珍豆腐</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">19:00 - 19:30</span><h3>🚕 返回酒店</h3><p>回酒店稍作准备，带上相机/三脚架，准备追泪！</p></div>
+      <div class="tl"><div class="tl-dot night"></div><span class="time-tag">19:30 - 22:00</span><h3>🌊 东疆湾/临港海岸线 · 追蓝眼泪！</h3><p>📍 东疆湾沙滩 或 临港海岸线公园<br>海浪拍打处泛起蓝色荧光，像星空落入大海。</p><div class="tips">📸 <strong>拍摄技巧：</strong>手机长曝光/专业模式，ISO调高，快门2-4秒。相机用三脚架+长曝光。<br>⚠️ 注意安全，不要下水，远离礁石。穿防滑鞋。</div></div>
+      <div class="tl"><div class="tl-dot night"></div><span class="time-tag">22:00 - 22:30</span><h3>🚕 回酒店</h3><p>滨海酒店打车10分钟。回味刚才的蓝色海浪入睡 🌊</p></div>
+    </div></div>
+  </div>
+
+  <div class="day-card day2">
+    <div class="day-header">☀️ Day 2 · 7月5日 周日 — 海边漫步 · 慢慢回家</div>
+    <div class="day-body"><div class="timeline">
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">09:30 - 10:30</span><h3>🥞 自然醒 + 早餐</h3><p>昨晚追泪到很晚，睡到自然醒。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">10:30 - 12:00</span><h3>🏖️ 东疆湾沙滩 · 白天的海</h3><p>昨晚看过蓝眼泪的海滩，白天再来踩沙踏浪。门票约50元/人。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">12:00 - 13:00</span><h3>🦐 海鲜午餐</h3><p>📍 渔家港湾(东疆湾店) · 皮皮虾、蛏子、海螺</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">13:00 - 13:30</span><h3>🏨 回酒店取行李</h3><p>打车回酒店，取行李退房。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">14:00 - 14:10</span><h3>🚕 酒店 → 滨海站</h3><p>打车10分钟。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">14:36 - 15:05</span><h3>🚇 C2576 滨海站 → 天津站</h3><p>城际列车 ¥12/人，29分钟。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">15:15 - 15:45</span><h3>🚕 天津站 → 天津南站</h3><p>打车约25分钟，¥30。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">16:34 - 17:40</span><h3>🚄 G803 天津南 → 济南西</h3><p>二等座 ¥147/人。17:40到家 💙</p></div>
+    </div></div>
+  </div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-transport">
+<div class="container">
+  <div class="honesty">✅ 车次数据来源：12306官网（2026.6.27查询）</div>
+  <div class="section">
+    <div class="section-title">🚄 高铁 · 济南西 ↔ 天津南</div>
+    <div class="tip-box">💡 和天津两日游攻略车次相同，去程G2580，返程G803。</div>
+  </div>
+  <div class="section">
+    <div class="section-title">🚇 城际列车 · 天津站 ↔ 滨海站</div>
+    <div class="tip-box">💡 C字头城际，二等座 ¥12/人，约22-29分钟。每天28班。</div>
+    <table class="train-table">
+      <tr><th>车次</th><th>出发</th><th>到达</th><th>历时</th><th>票价</th></tr>
+      <tr style="background:#e3f2fd"><td><strong>C2576 ⭐推荐</strong></td><td>14:36 滨海站</td><td>15:05 天津站</td><td>29分钟</td><td>¥12</td></tr>
+      <tr><td>C2580</td><td>15:02 滨海站</td><td>15:31 天津站</td><td>29分钟</td><td>¥12</td></tr>
+      <tr><td>C2582</td><td>15:59 滨海站</td><td>16:28 天津站</td><td>29分钟</td><td>¥12</td></tr>
+    </table>
+  </div>
+  <div style="margin-top:20px"><a href="https://www.12306.cn" target="_blank" style="display:inline-block;background:#0288d1;color:#fff;padding:10px 22px;border-radius:24px;text-decoration:none;font-weight:600;font-size:.92em">🚄 12306 购票</a></div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-hotel">
+<div class="container">
+  <div class="tip-box"><strong>📍 原则：</strong>住<strong>滨海新区/东疆湾附近</strong>，方便深夜看完蓝眼泪后快速回酒店。第二天也方便去海边。</div>
+  <div class="section">
+    <div class="section-title">⭐ 推荐住宿区域</div>
+    <div class="info-grid">
+      <div class="info-card"><h3>🏨 东疆湾附近</h3><ul><li>离蓝眼泪观赏点最近</li><li>看完步行/打车5分钟回酒店</li><li>推荐搜「东疆湾」附近的民宿</li></ul></div>
+      <div class="info-card"><h3>🏨 塘沽/滨海站附近</h3><ul><li>酒店选择多，性价比高</li><li>距蓝眼泪观赏点打车15分钟</li><li>距滨海站近，第二天坐城际方便</li></ul></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-tips">
+<div class="container">
+  <div class="section">
+    <div class="section-title">🌊 蓝眼泪观赏攻略</div>
+    <div class="vibe-box">
+      <h2>什么是蓝眼泪？</h2>
+      <p>蓝眼泪是一种海洋生物发光现象，由夜光藻（甲藻）引起。海浪拍打时，这些微小生物发出蓝色荧光，如同大海流下了蓝色的眼泪。</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card"><h3>📍 天津观赏地点</h3><ul><li>东疆湾沙滩</li><li>东疆建设开发纪念公园</li><li>临港海岸线公园</li><li>滨海新区沿海区域</li></ul></div>
+      <div class="info-card"><h3>⏰ 最佳时间</h3><ul><li>4-6月高发期</li><li>7月可见但概率较低</li><li>每天 19:00-凌晨</li><li>晴朗无风的夜晚最佳</li></ul></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">📸 拍摄技巧</div>
+    <div class="note-box"><h4>📱 手机拍摄</h4><p>打开专业模式：ISO 1600-3200，快门 2-4秒，对焦无穷远。需要三脚架或稳定放置。</p></div>
+    <div class="note-box"><h4>📷 相机拍摄</h4><p>三脚架必备。光圈 f/2.8，ISO 800-1600，曝光 4-15秒。广角镜头效果更好。</p></div>
+    <div class="note-box"><h4>💡 小技巧</h4><p>用石头扔向海面可以激发蓝光。海浪拍岸时蓝光最明显。远离光源，让眼睛适应黑暗。</p></div>
+  </div>
+  <div class="section">
+    <div class="section-title">⚠️ 注意事项</div>
+    <div class="note-box"><h4>🌊 安全第一</h4><p>不要下水！远离礁石和悬崖。穿防滑鞋，带手电筒。结伴而行。</p></div>
+    <div class="note-box"><h4>🎫 管理提示</h4><p>2026年部分区域因蓝眼泪观赏已实行夜间闭园管理，需提前确认开放情况。</p></div>
+    <div class="note-box"><h4>🌡️ 天气</h4><p>选晴朗无风的夜晚。雨天、大风天不会出现蓝眼泪。关注当地实时追泪信息。</p></div>
+  </div>
+  <div class="section">
+    <div class="section-title">💰 预算参考（两人合计）</div>
+    <table class="budget-table">
+      <tr><th>项目</th><th>说明</th><th style="text-align:right">费用</th></tr>
+      <tr><td>🚄 高铁往返</td><td>去程¥156+返程¥147 ×2人</td><td style="text-align:right;color:#0288d1;font-weight:600">¥606</td></tr>
+      <tr><td>🚇 城际列车</td><td>C字头 ¥12/人 ×1趟 ×2人</td><td style="text-align:right;color:#0288d1;font-weight:600">¥24</td></tr>
+      <tr><td>🏨 住宿</td><td>滨海酒店一晚</td><td style="text-align:right;color:#0288d1;font-weight:600">¥200-400</td></tr>
+      <tr><td>🍽️ 餐饮</td><td>2天 4-5顿</td><td style="text-align:right;color:#0288d1;font-weight:600">¥300-500</td></tr>
+      <tr><td>🚗 交通</td><td>打车为主</td><td style="text-align:right;color:#0288d1;font-weight:600">¥80-130</td></tr>
+      <tr><td>🎫 门票</td><td>东疆湾沙滩</td><td style="text-align:right;color:#0288d1;font-weight:600">¥100</td></tr>
+      <tr><td colspan="2"><strong>两人合计</strong></td><td style="text-align:right;color:#0288d1;font-weight:700">¥1,300-1,760</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<div class="footer">💙 济南→天津 追蓝眼泪 · 情侣夜游 ｜ 2026年7月4-5日<br>重要的是两个人一起追光的浪漫<br><br>⚠️ 蓝眼泪为自然现象，不保证每天可见。4-6月为高发期。</div>
+
+<script>
+document.querySelector('.tab-bar').addEventListener('click', function(e) {
+  var btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  var name = btn.getAttribute('data-tab');
+  var pages = document.querySelectorAll('.tab-page');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+});
+</script>
+</body>
+</html>

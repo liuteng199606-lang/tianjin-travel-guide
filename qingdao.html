@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>济南→青岛 特色体验攻略</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#faf8f6;color:#444;line-height:1.85;font-size:15px}
+.hero{background:linear-gradient(135deg,#e65100,#ff9800);color:#fff;padding:50px 30px;text-align:center}
+.hero h1{font-size:2.4em;font-weight:900}
+.hero .sub{opacity:.92;margin-top:6px;font-size:1.05em}
+
+/* Tabs */
+.tab-bar{display:flex;background:#2c2c3a;position:sticky;top:0;z-index:100}
+.tab-btn{flex:1;padding:14px 8px;text-align:center;color:rgba(255,255,255,.6);cursor:pointer;font-size:.88em;font-weight:600;border:none;background:none;white-space:nowrap;border-bottom:3px solid transparent}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,.05)}
+.tab-btn.active{color:#fff;border-bottom-color:#e65100;background:rgba(255,255,255,.08)}
+.tab-page{display:none}
+.tab-page.active{display:block}
+
+.container{max-width:880px;margin:0 auto;padding:30px 20px}
+.section{margin-bottom:36px}
+.section-title{font-size:1.4em;font-weight:700;color:#2c2c3a;margin-bottom:16px}
+
+/* Cards */
+.day-card{background:#fff;border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.06);overflow:hidden;margin-bottom:26px}
+.day-header{padding:16px 24px;color:#fff;font-size:1.15em;font-weight:700}
+.day1 .day-header{background:linear-gradient(135deg,#e65100,#ff9800)}
+.day2 .day-header{background:linear-gradient(135deg,#ef6c00,#ffb74d)}
+.day-body{padding:22px 24px}
+
+/* Timeline */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2.5px;background:linear-gradient(to bottom,#e65100,#ffe0b2);border-radius:2px}
+.tl{position:relative;margin-bottom:22px}
+.tl:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-23px;top:5px;width:13px;height:13px;border-radius:50%;background:#e65100;border:2.5px solid #fff;box-shadow:0 0 0 2px #e65100}
+.tl-dot.food{background:#e65100;box-shadow:0 0 0 2px #e65100}
+.tl-dot.transport{background:#4caf50;box-shadow:0 0 0 2px #4caf50}
+.tl-dot.night{background:#3f51b5;box-shadow:0 0 0 2px #3f51b5}
+.time-tag{display:inline-block;background:#fff3e0;color:#e65100;padding:1px 10px;border-radius:14px;font-size:.8em;font-weight:600;margin-bottom:4px}
+.tl h3{font-size:1.02em;font-weight:700;color:#2c2c3a;margin-bottom:2px}
+.tl p{color:#888;font-size:.9em}
+.tips{background:#fff8e1;border-left:3px solid #ffc107;padding:7px 11px;margin-top:7px;border-radius:0 8px 8px 0;font-size:.84em;color:#795548}
+
+/* Info grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.info-card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.info-card h3{font-size:.98em;margin-bottom:8px}
+.info-card ul{list-style:none;padding:0}
+.info-card li{padding:2px 0;padding-left:14px;position:relative;color:#888;font-size:.88em}
+.info-card li::before{content:'•';position:absolute;left:0;color:#e65100;font-weight:bold}
+
+/* Vibe */
+.vibe-box{background:linear-gradient(135deg,#fff5f5,#ffeaa7);border-radius:18px;padding:24px;text-align:center;margin-bottom:26px}
+.vibe-box h2{font-size:1.2em;color:#e65100;margin-bottom:8px}
+.vibe-box p{color:#7f8c8d;font-size:.9em}
+.vibe-tags{margin-top:12px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.vibe-tags span{background:#fff;padding:4px 14px;border-radius:16px;font-size:.82em;color:#e65100;font-weight:500}
+
+/* Tables */
+.train-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:14px}
+.train-table th{background:#e65100;color:#fff;padding:11px 14px;text-align:left;font-size:.85em;font-weight:600}
+.train-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.88em}
+.train-table tr:last-child td{border-bottom:none}
+.budget-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.budget-table th{background:#e65100;color:#fff;padding:11px 14px;text-align:left;font-size:.88em}
+.budget-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.9em}
+.budget-table tr:last-child td{border-bottom:none;background:#fff3e0;font-weight:700}
+.amt{text-align:right;color:#e65100;font-weight:600}
+
+/* Hotel */
+.hotel-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:14px;display:flex}
+.hotel-icon{width:90px;display:flex;align-items:center;justify-content:center;font-size:2.4em;flex-shrink:0}
+.hotel-info{padding:14px 18px;flex:1}
+.hotel-info h3{font-size:1em;font-weight:700;color:#2c2c3a;margin-bottom:3px}
+.hotel-info .price{color:#e65100;font-weight:700;font-size:1.05em}
+.hotel-info .tags{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0}
+.hotel-info .tag{background:#f5f0eb;padding:1px 8px;border-radius:8px;font-size:.72em;color:#888}
+.hotel-info p{font-size:.84em;color:#666}
+
+/* Food */
+.food-card{background:#fff;border-radius:18px;padding:14px 18px;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.food-emoji{font-size:1.6em}
+.food-info h4{font-weight:700;font-size:.9em}
+.food-info p{font-size:.82em;color:#888}
+.food-price{margin-left:auto;color:#e65100;font-weight:700;font-size:.95em;white-space:nowrap}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.photo-card{border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);position:relative;aspect-ratio:16/10;background:#e0e0e0}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.65));color:#fff;padding:16px 12px 8px;font-size:.85em;font-weight:500}
+
+/* Note boxes */
+.note-box{background:#fff;border-left:4px solid #e91e63;border-radius:0 18px 18px 0;padding:14px 18px;margin-bottom:12px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.note-box h4{color:#e65100;margin-bottom:3px;font-size:.92em}
+.note-box p{font-size:.85em;color:#888}
+.tip-box{background:#fff8e1;border-left:4px solid #ffc107;border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px;font-size:.88em;color:#795548}
+.honesty{background:#e3f2fd;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.85em;color:#1565c0}
+
+/* Map */
+#map{width:100%;height:50vh;min-height:350px;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-bottom:16px;background:#e0e0e0}
+
+.footer{text-align:center;padding:30px;color:#bbb;font-size:.8em}
+
+@media(max-width:640px){
+  .hotel-card{flex-direction:column}
+  .hotel-icon{width:100%;height:60px}
+  .tab-btn{font-size:.78em;padding:12px 4px}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>🍺 济南 → 青岛</h1>
+  <div class="sub">海滨慢旅行 · 特色体验攻略 ｜ 7月4日-5日</div>
+</div>
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="plan">📋 行程</button>
+  <button class="tab-btn" data-tab="transport">🚄 车次</button>
+  <button class="tab-btn" data-tab="hotel">🏨 酒店</button>
+  <button class="tab-btn" data-tab="food">🍜 美食</button>
+  <button class="tab-btn" data-tab="tips">💡 提示</button>
+</div>
+
+<div class="tab-page active" id="tab-plan">
+<div class="container">
+  <div class="vibe-box">
+    <h2>🍺 青岛的正确打开方式</h2>
+    <p>红瓦绿树、碧海蓝天。栈桥吹海风、八大关看洋楼、崂山观云海、啤酒街干杯。这就是青岛。</p>
+    <div class="vibe-tags">
+      <span>🏖️ 海滩</span><span>🏛️ 老城</span><span>🍺 啤酒</span>
+      <span>🦐 海鲜</span><span>⛰️ 崂山</span><span>🌅 日落</span>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card"><h3>🕐 出发</h3><ul><li>济南东/济南站出发</li><li>高铁约 1.5-2 小时</li><li>到青岛站（靠近老城）</li></ul></div>
+    <div class="info-card"><h3>🏨 住哪里</h3><ul><li>推荐市南区：栈桥/八大关</li><li>步行可达多个景点</li><li>预算 200-500 元/晚</li></ul></div>
+    <div class="info-card"><h3>🔙 返程</h3><ul><li>下午从青岛站出发</li><li>约 1.5-2 小时回济南</li><li>不耽误周一上班</li></ul></div>
+  </div>
+
+  <div class="day-card day1">
+    <div class="day-header">🌹 Day 1 · 7月4日 周六 — 老城漫步 · 海鲜啤酒</div>
+    <div class="day-body"><div class="timeline">
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">09:00 - 11:00</span><h3>🚄 济南 → 青岛</h3><p>高铁约1.5-2小时，二等座约¥120-150。建议到青岛站。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">11:00 - 11:30</span><h3>🚕 到酒店放行李</h3><p>打车10分钟到市南区酒店。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">12:00 - 13:30</span><h3>🍽️ 午餐：劈柴院</h3><p>📍 市南区中山路 · 青岛最有名的美食街<br>辣炒蛤蜊、烤鱿鱼、鲅鱼水饺、原浆啤酒。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">14:00 - 15:30</span><h3>🌉 栈桥 + 小青岛</h3><p>📍 市南区太平路 · 青岛标志<br>栈桥尽头回澜阁，远眺小青岛灯塔。免费。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">15:30 - 16:30</span><h3>⛰️ 信号山公园</h3><p>📍 市南区龙山路 · 门票约15元<br>山顶旋转观景台，360°俯瞰老城红瓦绿树。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">16:30 - 18:00</span><h3>🏛️ 八大关 · 万国建筑博览</h3><p>📍 市南区汇泉角 · 免费<br>花石楼、公主楼、蝴蝶楼。梧桐树荫下漫步，拍照超出片。</p></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">18:30 - 20:00</span><h3>🍽️ 晚餐：营口路啤酒街</h3><p>📍 市北区营口路 · 青岛最地道的啤酒街<br>买海鲜加工+散装原浆啤酒，人均80-120元。</p></div>
+      <div class="tl"><div class="tl-dot night"></div><span class="time-tag">20:00 - 21:30</span><h3>🌅 海边散步 · 栈桥夜景</h3><p>沿海边栈道散步回酒店，栈桥灯光倒映海面。</p></div>
+    </div></div>
+  </div>
+
+  <div class="day-card day2">
+    <div class="day-header">☀️ Day 2 · 7月5日 周日 — 崂山云海 · 慢慢回家</div>
+    <div class="day-body"><div class="timeline">
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">08:00 - 09:00</span><h3>🥞 早餐</h3><p>酒店附近吃青岛大包、甜沫。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">09:00 - 09:40</span><h3>🚕 酒店 → 崂山风景区</h3><p>打车约40分钟。建议走南线（太清宫方向）。</p></div>
+      <div class="tl"><div class="tl-dot"></div><span class="time-tag">10:00 - 13:00</span><h3>⛰️ 崂山 · 海上名山第一</h3><p>📍 崂山区 · 门票约90-150元<br>太清宫→上清宫→明霞洞。山海相连，云雾缭绕。</p><div class="tips">📸 崂山是道教名山，山上有矿泉水（崂山矿泉水原产地）<br>⚠️ 穿舒适运动鞋，带水和防晒</div></div>
+      <div class="tl"><div class="tl-dot food"></div><span class="time-tag">13:00 - 14:00</span><h3>🍽️ 午餐：崂山农家宴</h3><p>山脚下农家院，崂山菇炖鸡、海水豆腐。人均60-80元。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">14:00 - 14:40</span><h3>🚕 崂山 → 青岛站</h3><p>打车约40分钟。</p></div>
+      <div class="tl"><div class="tl-dot transport"></div><span class="time-tag">15:30 - 17:30</span><h3>🚄 青岛 → 济南</h3><p>高铁约1.5-2小时，二等座约¥130。回味青岛的海风和啤酒 🍺</p></div>
+    </div></div>
+  </div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-transport">
+<div class="container">
+  <div class="honesty">✅ 车次以12306实时查询为准。</div>
+  <div class="section">
+    <div class="section-title">🚄 济南 ↔ 青岛 高铁</div>
+    <table class="train-table">
+      <tr><th>类型</th><th>历时</th><th>二等座</th><th>一等座</th><th>备注</th></tr>
+      <tr style="background:#fff3e0"><td><strong>G字头</strong></td><td>约1.5小时</td><td>¥140-150</td><td>¥220-240</td><td>最快</td></tr>
+      <tr><td>D字头</td><td>约2小时</td><td>¥120-130</td><td>¥190-200</td><td>性价比高</td></tr>
+    </table>
+    <div class="tip-box">💡 建议到<strong>青岛站</strong>（市南区），靠近栈桥、八大关。比青岛北站方便很多。</div>
+  </div>
+  <div style="margin-top:20px"><a href="https://www.12306.cn" target="_blank" style="display:inline-block;background:#e65100;color:#fff;padding:10px 22px;border-radius:24px;text-decoration:none;font-weight:600;font-size:.92em">🚄 12306 购票</a></div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-hotel">
+<div class="container">
+  <div class="tip-box"><strong>📍 原则：</strong>住<strong>市南区</strong>，步行可达栈桥、八大关、信号山。</div>
+  <div class="section">
+    <div class="section-title">⭐ 推荐住宿</div>
+    <div class="info-grid">
+      <div class="info-card"><h3>🏨 栈桥/中山路</h3><ul><li>最方便，步行到栈桥</li><li>劈柴院美食街就在旁边</li><li>经济型 ¥200-350/晚</li></ul></div>
+      <div class="info-card"><h3>🏨 八大关/汇泉</h3><ul><li>环境最好，海景房</li><li>步行到八大关/海水浴场</li><li>舒适型 ¥350-600/晚</li></ul></div>
+      <div class="info-card"><h3>🏨 台东附近</h3><ul><li>美食最多</li><li>台东步行街就在楼下</li><li>性价比高 ¥180-300/晚</li></ul></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-food">
+<div class="container">
+  <div class="section">
+    <div class="section-title">🍜 青岛必吃</div>
+    <div class="food-card"><div class="food-emoji">🦐</div><div class="food-info"><h4>辣炒蛤蜊</h4><p>青岛第一小吃，配啤酒绝了</p></div><div class="food-price">30-50元</div></div>
+    <div class="food-card"><div class="food-emoji">🥟</div><div class="food-info"><h4>鲅鱼水饺</h4><p>青岛特色，鲜美多汁</p></div><div class="food-price">30-50元</div></div>
+    <div class="food-card"><div class="food-emoji">🦑</div><div class="food-info"><h4>烤鱿鱼</h4><p>台东步行街标配</p></div><div class="food-price">10-20元</div></div>
+    <div class="food-card"><div class="food-emoji">🍺</div><div class="food-info"><h4>青岛原浆啤酒</h4><p>散装新鲜，和瓶装完全不同</p></div><div class="food-price">15-30元/杯</div></div>
+    <div class="food-card"><div class="food-emoji">🐟</div><div class="food-info"><h4>海鲜大咖</h4><p>一锅各种海鲜，两个人够吃</p></div><div class="food-price">150-250元</div></div>
+    <div class="food-card"><div class="food-emoji">🍲</div><div class="food-info"><h4>崂山菇炖鸡</h4><p>崂山特色农家菜</p></div><div class="food-price">60-80元</div></div>
+  </div>
+  <div class="section">
+    <div class="section-title">📍 去哪吃</div>
+    <div class="info-grid">
+      <div class="info-card"><h3>🏮 劈柴院</h3><ul><li>📍 市南区中山路</li><li>最有名的美食街</li><li>适合游客打卡</li></ul></div>
+      <div class="info-card"><h3>🍺 营口路啤酒街</h3><ul><li>📍 市北区营口路</li><li>最地道的啤酒街</li><li>买海鲜+散啤</li></ul></div>
+      <div class="info-card"><h3>🛍️ 台东步行街</h3><ul><li>📍 市北区台东</li><li>小吃最多</li><li>晚上最热闹</li></ul></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tab-page" id="tab-tips">
+<div class="container">
+  <div class="section">
+    <div class="section-title">💰 预算参考（两人合计）</div>
+    <table class="budget-table">
+      <tr><th>项目</th><th>说明</th><th style="text-align:right">费用</th></tr>
+      <tr><td>🚄 高铁往返</td><td>约¥130 ×2人 ×2趟</td><td style="text-align:right;color:#e65100;font-weight:600">¥520</td></tr>
+      <tr><td>🏨 住宿</td><td>舒适型酒店一晚</td><td style="text-align:right;color:#e65100;font-weight:600">¥250-500</td></tr>
+      <tr><td>🍽️ 餐饮</td><td>2天 5-6顿</td><td style="text-align:right;color:#e65100;font-weight:600">¥400-600</td></tr>
+      <tr><td>🎫 门票</td><td>崂山+信号山+啤酒博物馆</td><td style="text-align:right;color:#e65100;font-weight:600">¥200</td></tr>
+      <tr><td>🚗 交通</td><td>打车+崂山往返</td><td style="text-align:right;color:#e65100;font-weight:600">¥150-200</td></tr>
+      <tr><td colspan="2"><strong>两人合计</strong></td><td style="text-align:right;color:#e65100;font-weight:700">¥1,520-2,020</td></tr>
+    </table>
+  </div>
+  <div class="section">
+    <div class="section-title">💡 温馨提示</div>
+    <div class="note-box"><h4>🌊 关于海</h4><p>青岛的海比天津蓝很多！海水浴场免费，7月可以下海游泳。</p></div>
+    <div class="note-box"><h4>⛰️ 崂山</h4><p>建议走南线（太清宫），风景最好。穿运动鞋，带水和防晒。山上信号不好，提前下好地图。</p></div>
+    <div class="note-box"><h4>🍺 啤酒</h4><p>一定要喝散装原浆！瓶装和散装是两种味道。营口路啤酒街最正宗。</p></div>
+    <div class="note-box"><h4>☀️ 防晒</h4><p>7月青岛30°C+，海边紫外线强。防晒霜、墨镜、帽子必备。</p></div>
+  </div>
+</div>
+</div>
+
+<div class="footer">🍺 济南→青岛 海滨慢旅行 ｜ 2026年7月4-5日<br>红瓦绿树、碧海蓝天、原浆啤酒<br><br>⚠️ 车次以12306实时查询为准</div>
+
+<script>
+document.querySelector('.tab-bar').addEventListener('click', function(e) {
+  var btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  var name = btn.getAttribute('data-tab');
+  var pages = document.querySelectorAll('.tab-page');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+});
+</script>
+</body>
+</html>
